@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 
 const SimpleInput = (props) => {
@@ -10,6 +10,22 @@ const SimpleInput = (props) => {
 
   const enteredNameIsValid = enteredName.trim() !== '';
   const nameInputIsInValid = !enteredNameIsValid && enteredNameTouched;
+  const [formIsValid, setFormIsValid] = useState(false);
+
+
+
+  //badna na3mul update lal form iza wehed men el form input changes 
+  //overall form validity 
+  useEffect(() => {
+    // if (enteredNameIsValid && enteredAgeIsValid) {} iza keno tnen w tab3an mnzida ka dependency
+
+    if (enteredNameIsValid) {
+      setFormIsValid(true);
+    } else { //iza wahde menon invalid mnhet kell el form invalid
+      setFormIsValid(false);
+    }
+
+  }, [enteredNameIsValid]);
 
   //fia true
   // fadye false
@@ -74,7 +90,7 @@ const SimpleInput = (props) => {
         {nameInputIsInValid && <p className='error-text'>Name must not be empty</p>}
       </div>
       <div className="form-actions">
-        <button>Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
@@ -84,14 +100,8 @@ const SimpleInput = (props) => {
 
 export default SimpleInput;
 
-
-
-
-
-
-
-
-
+//false tabi3e
+// true yaane 3mul disabled
 
 
 
