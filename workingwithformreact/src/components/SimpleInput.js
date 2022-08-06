@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 
 const SimpleInput = (props) => {
@@ -6,41 +6,38 @@ const SimpleInput = (props) => {
 
 
   const [enteredName, setEnteredName] = useState('');
-  const [enteredNameTouched, setEnteredNameTouched] = useState(false)
+  const [enteredNameTouched, setEnteredNameTouched] = useState(false);
+
+
+  const [enteredEmail, setEnteredEmail] = useState('');
+  const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
+
+
 
   const enteredNameIsValid = enteredName.trim() !== '';
   const nameInputIsInValid = !enteredNameIsValid && enteredNameTouched;
-  const [formIsValid, setFormIsValid] = useState(false);
+
+  const enteredEmailIsValid = enteredEmail.includes('@');
+  const enteredEmailIsInValid = !enteredEmailIsValid && enteredEmailTouched;
 
 
+  let formIsValid = false;
 
-  //badna na3mul update lal form iza wehed men el form input changes 
-  //overall form validity 
-  useEffect(() => {
-    // if (enteredNameIsValid && enteredAgeIsValid) {} iza keno tnen w tab3an mnzida ka dependency
 
-    if (enteredNameIsValid) {
-      setFormIsValid(true);
-    } else { //iza wahde menon invalid mnhet kell el form invalid
-      setFormIsValid(false);
-    }
-
-  }, [enteredNameIsValid]);
-
-  //fia true
-  // fadye false
+  if (enteredNameIsValid && enteredEmailIsValid) {
+    formIsValid = true;
+  }
 
 
 
   const nameInputChangeHandler = event => {
     setEnteredName(event.target.value);
     console.log("3");
-    //  if (enteredName.trim() !== '') {
-    //       setEnteredNameIsValid(true);
-    //hon iza elna hik..yaane nehna we refer to the old state
-    //so el azbat iza badna nheta..nheta event.target.value
-    //la tkun synchronus w refer la zet el text
-    //   };
+  }
+
+  const emailInputChangeHandler = event => {
+    setEnteredEmail(event.target.value);
+    console.log("3");
   }
 
 
@@ -52,6 +49,11 @@ const SimpleInput = (props) => {
     console.log("1");
   }
 
+  const emailInputBlurHandler = (event) => {
+    setEnteredEmailTouched(true);
+    console.log("1");
+  }
+
 
 
 
@@ -59,13 +61,17 @@ const SimpleInput = (props) => {
   const formSubmissionHandler = (event) => {
     event.preventDefault();
     setEnteredNameTouched(true);
-    console.log("2");
+
     if (!enteredNameIsValid) {
       return;
     }
 
     setEnteredName('');
     setEnteredNameTouched(false);
+
+    setEnteredEmail('');
+    setEnteredEmailTouched(false);
+
   };
 
 
@@ -73,7 +79,7 @@ const SimpleInput = (props) => {
 
   const nameInputClasses = nameInputIsInValid ? 'form-control invalid' : 'form-control';
 
-
+  const emailInputClasses = enteredEmailIsInValid ? 'form-control invalid' : 'form-control';
 
   return (
 
@@ -89,6 +95,23 @@ const SimpleInput = (props) => {
         />
         {nameInputIsInValid && <p className='error-text'>Name must not be empty</p>}
       </div>
+
+
+      <div className={emailInputClasses}>
+        <label htmlFor='email'>Your Email</label>
+        <input
+          value={enteredEmail}
+          type='email'
+          id='email'
+          onChange={emailInputChangeHandler}
+          onBlur={emailInputBlurHandler}
+        />
+        {enteredEmailIsInValid && <p className='error-text'>please Enter a valid Email</p>}
+      </div>
+
+
+
+
       <div className="form-actions">
         <button disabled={!formIsValid}>Submit</button>
       </div>
@@ -99,6 +122,11 @@ const SimpleInput = (props) => {
 
 
 export default SimpleInput;
+
+
+
+
+
 
 //false tabi3e
 // true yaane 3mul disabled
