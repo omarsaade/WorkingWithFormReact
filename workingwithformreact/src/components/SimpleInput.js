@@ -16,7 +16,6 @@ const SimpleInput = (props) => {
 
 
 
-
   let formIsValid = false;
 
 
