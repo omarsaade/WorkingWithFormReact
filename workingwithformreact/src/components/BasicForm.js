@@ -1,5 +1,8 @@
 import useInput from "../hooks/use-input";
 
+// we can use Formik
+// https://formik.org/docs/overview
+
 const isNotEmpty = value => value.trim() !== '';
 const isEmail = value => value.includes('@');
 // custom hook returns an object as we learned 
