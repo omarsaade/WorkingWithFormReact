@@ -1,4 +1,5 @@
-import useInput from "../hooks/use-input";
+// import useInput from "../hooks/use-input";
+import useInputt from "../hooks/use-inputt";
 
 // we can use Formik
 // https://formik.org/docs/overview
@@ -15,7 +16,7 @@ const BasicForm = (props) => {
     valueChangeHandler: firstNameChangeHandler,
     inputBlurHandler: firstNameBlurHandler,
     reset: resetFirstName }
-    = useInput(isNotEmpty);
+    = useInputt(isNotEmpty);
 
   const { value: lastNameValue,
     isValid: lastNameIsValid,
@@ -23,7 +24,7 @@ const BasicForm = (props) => {
     valueChangeHandler: lastNameChangeHandler,
     inputBlurHandler: lastNameBlurHandler,
     reset: resetLastName, }
-    = useInput(isNotEmpty);
+    = useInputt(isNotEmpty);
 
 
   const { value: emailValue,
@@ -32,7 +33,7 @@ const BasicForm = (props) => {
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmail, }
-    = useInput(isEmail)
+    = useInputt(isEmail)
 
 
 
