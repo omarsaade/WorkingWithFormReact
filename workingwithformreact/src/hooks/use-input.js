@@ -36,3 +36,4 @@ function useInput(ValidateValue) {
 };
 
 export default useInput
+

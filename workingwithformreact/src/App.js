@@ -5,8 +5,8 @@ import useInput from './hooks/use-input';
 function App() {
   return (
     <div className="app">
-      {/* <SimpleInput /> */}
-      <BasicForm />
+      <SimpleInput />
+      {/* <BasicForm /> */}
     </div>
   );
 }
